@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'login',
+    'projectM',
+    'repoM',
     'captcha',
     'django.contrib.admin',
     'django.contrib.auth',
