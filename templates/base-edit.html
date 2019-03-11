@@ -49,20 +49,14 @@
         </div>
       </div>
     </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          {% block sidebar %}{% endblock %}
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">{% block page-header %}Dashboard{% endblock %}</h1>
-		   {% block main_content %}{% endblock %}      
-          </div>
-        </div>
-      </div>
+    <div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{% block page-header %}Dashboard{% endblock %}</h3>
+                </div>
+            <div class="panel-body"> {% block main_content %}{% endblock %}</div>
+            </div>      
     </div>
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

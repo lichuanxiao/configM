@@ -1,0 +1,67 @@
+{% extends 'base-edit.html' %}
+{% load staticfiles %}
+{% block title %}编辑用户
+{% endblock title %}
+{% block css %}
+{% endblock css %}
+{% block page-header %}编辑用户{% endblock %}
+{% block main_content %}
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+          <form class='form-horizontal' action="{% url 'edituser' userinfo.id %}" method="post">
+
+              {% if message %}
+                  <div class="alert alert-warning">{{ message }}</div>
+              {% endif %}
+
+              {% csrf_token %}
+
+                <div class="form-group">
+                <label for="username" class="col-md-3 control-label">用户名：</label>
+                <div class="col-md-9">
+                <input type="text" class="form-control" id="username" name="username"   value={{userinfo.username}} readonly>      
+                </div>
+                </div>
+                <div class="form-group">
+                <label for="fullname" class="col-md-3 control-label">全名：</label>
+                <div class="col-md-9">
+                <input type="text" class="form-control" id="fullname" name="fullname" value={{userinfo.fullname}} >  
+                </div>
+                </div>
+              <div class="form-group">
+                <label for="email" class="col-md-3 control-label">邮箱地址：</label>
+                <div class="col-md-9">
+                <input type="text" class="form-control" id="email"  name="email" value={{userinfo.email}} >  
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password1" class="col-md-3 control-label">密码：</label>
+                <div class="col-md-9">
+                <input type="password" class="form-control" id="password1"  name="password1" value={{userinfo.password}} >  
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="password1" class="col-md-3 control-label">确认密码：</label>
+                <div class="col-md-9">
+                <input type="password" class="form-control" id="password2"  name="password2" value={{userinfo.password}} >  
+                </div>
+              </div>
+              <div class="form-group">
+              <label for="password1" class="col-md-3 control-label">性别：</label>
+                <div class="col-md-9">
+               <select class="form-control" name='sex' value={{userinfo.sex}}>
+                    <option value='male'>男</option>
+                     <option value='female'>女</option>
+                </select>
+              </div>
+            </div>
+          
+            <div class="col-md-9 col-md-offset-3">
+              <button type="submit" class="btn btn-primary pull-right btn-block">提交</button>
+           </div>
+
+          </form>
+        </div>
+    </div> 
+    
+{% endblock main_content %}

@@ -44,7 +44,7 @@ def logout(request):
     return redirect('/login/')
 
 
-def register(request):
+def adduser(request):
     if request.method == 'POST':
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
@@ -57,12 +57,43 @@ def register(request):
             try:
                 user_obj =  User.objects.get(username=username)
                 message = "用户已存在"
-                return render(request,'register.html',locals())
+                return render(request,'adduser.html',locals())
             except:
                 if password1 != password2:
                     message = "密码不一致"
-                    return render(request,'register.html',locals())
+                    return render(request,'adduser.html',locals())
                 User.objects.create(username=username,fullname=fullname,password=password1,email=email,sex=sex)
-                return redirect('/index/')
+                return redirect('/user/')
     register_form = RegisterForm()
-    return render(request,'register.html', locals())
+    return render(request,'adduser.html', locals())
+
+
+def user(request):
+    userlist = User.objects.all()
+    if request.method == 'POST':
+        pass
+    return render(request,'user.html',locals())
+
+
+def deleteuser(request,user_id):
+    User.objects.get(id=user_id).delete()
+    return redirect('/user/')
+
+def edituser(request,user_id):
+    userinfo = User.objects.filter(id=user_id).values()[0]
+    if request.method == 'POST':
+        editinfo = request.POST.dict()
+        if editinfo['password1'] != editinfo['password2']:
+            message = "密码不一致"
+            return render(request,'edituser.html',locals())
+        User.objects.filter(id=user_id).update(username=editinfo['username'],fullname=editinfo['fullname'],password=editinfo['password1'],email=editinfo['email'],sex=editinfo['sex'])
+        return redirect('/user/') 
+    return render(request,'edituser.html',locals())
+
+def searchuser(request):
+    if request.method == 'POST':
+        user_search = request.POST.dict()['user_search_filter']
+        userlist = User.objects.filter(username__icontains=user_search)
+        if  not userlist:
+           userlist = User.objects.filter(email__icontains=user_search) 
+    return render(request,'user.html',locals())   

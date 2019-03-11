@@ -15,12 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from login.views import index,login,logout,register
+from login.views import index,login,logout,adduser,user,deleteuser,edituser,searchuser
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index/',index),
+    url(r'^user',user),
     url(r'^login/',login),
     url(r'^logout/',logout),
-    url(r'^register/',register),
+    url(r'^adduser/',adduser,name='adduser'),
+    url(r'^edituser/([0-9]+)/$',edituser,name='edituser'),
+    url(r'^deleteuser/([0-9]+)/$',deleteuser,name='deleteuser'),
+    url(r'^searchuser/',searchuser,name='searchuser'),
     url(r'^captcha',include('captcha.urls')),
 ]

@@ -1,13 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'base-edit.html' %}
 {% load staticfiles %}
-{% block title %}注册
+{% block title %}添加用户
 {% endblock title %}
 {% block css %}
 {% endblock css %}
-{% block content %}
+{% block page-header %}添加用户{% endblock %}
+{% block main_content %}
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
-          <form class='form-register' action="/register/" method="post">
+          <form class='form-register' action="/adduser/" method="post">
 
               {% if message %}
                   <div class="alert alert-warning">{{ message }}</div>
@@ -15,7 +16,6 @@
 
               {% csrf_token %}
 
-              <h2 class="text-center">欢迎注册</h2>
               <div class="form-group">
                   {{ register_form.username.label_tag }}
                   {{ register_form.username}}
@@ -53,4 +53,4 @@
         </div>
     </div> 
     
-{% endblock content %}
+{% endblock main_content %}
