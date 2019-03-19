@@ -5,8 +5,6 @@ from copy import deepcopy
 # Create your views here.
 
 def systemconfig(request):
-    if request.method == 'POST':
-        return HttpResponse('敬请期待')
     systemconfig_obj = SystemConfig.objects.all()
     return render(request,'systemconfig.html',locals())
 
