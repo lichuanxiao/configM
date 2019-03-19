@@ -7,12 +7,31 @@ from copy import deepcopy
 def systemconfig(request):
     if request.method == 'POST':
         return HttpResponse('敬请期待')
+    systemconfig_obj = SystemConfig.objects.all()
     return render(request,'systemconfig.html',locals())
 
 
-def editsystemconfig(request):
-    pass
+def editsystemconfig(request,system_id):
+    try:
+        systemconfig_obj = SystemConfig.objects.get(id=system_id)
+    except:
+        message = '该项不存在'
+        return redirect('/repoM/systemconfig/')
+    if request.method == 'POST':
+        sys_info = deepcopy(request.POST.dict())
+        del sys_info['csrfmiddlewaretoken']
+        SystemConfig.objects.filter(id=system_id).update(**sys_info)
+        return redirect('/repoM/systemconfig/')
+    return render(request,'editsystemconfig.html', locals())
 
+def delsystemconfig(request,system_id):
+    try:
+        systemconfig_obj = SystemConfig.objects.get(id=system_id)
+    except:
+        message = '该项不存在'
+        return redirect('/repoM/systemconfig/')
+    SystemConfig.objects.filter(id=system_id).delete()
+    return redirect('/repoM/systemconfig/')
 
 def addsystemconfig(request):
     if request.method == 'POST':

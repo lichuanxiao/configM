@@ -1,0 +1,93 @@
+{% extends 'base-edit.html' %}
+{% load staticfiles %}
+{% block title %}编辑配置
+{% endblock title %}
+{% block css %}
+{% endblock css %}
+{% block page-header %}编辑配置{% endblock %}
+{% block main_content %}
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+          <form class='form-horizontal' action="{% url 'editsystemconfig' systemconfig_obj.id %}" method="post">
+
+              {% if message %}
+                  <div class="alert alert-warning">{{ message }}</div>
+              {% endif %}
+
+              {% csrf_token %}
+                <div class="form-group">
+                <label for="sys_name" class="col-md-3 control-label">系统名称：</label>
+                <div class="col-md-9">
+                <input type="text" class="form-control" id="sys_name" name="sys_name" value={{systemconfig_obj.sys_name}} readonly>      
+                </div>
+                </div>
+                <div class="form-group">
+                <label for="sys_url" class="col-md-3 control-label">系统地址：</label>
+                <div class="col-md-9">
+                <input type="url" class="form-control" id="sys_url" name="sys_url" value={{systemconfig_obj.sys_url}}>      
+                </div>
+                </div>
+                <div class="form-group">
+                <label for="sys_api_url" class="col-md-3 control-label">API 地址：</label>
+                <div class="col-md-9">
+                <input type="url" class="form-control" id="sys_api_url" name="sys_api_url" value={{systemconfig_obj.sys_api_url}} >  
+                </div>
+                </div>
+              <div class="form-group">
+                <label for="sys_username" class="col-md-3 control-label">系统用户名：</label>
+                <div class="col-md-9">
+                <input type="text" class="form-control" id="sys_username"  name="sys_username" value={{systemconfig_obj.sys_username}}>  
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="sys_password" class="col-md-3 control-label">密码：</label>
+                <div class="col-md-9">
+                <input type="password" class="form-control" id="sys_password"  name="sys_password" value={{systemconfig_obj.sys_password}}>  
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="sys_privatetoken" class="col-md-3 control-label">系统 TOKEN：</label>
+                <div class="col-md-9">
+                <input type="text" class="form-control" id="sys_privatetoken"  name="sys_privatetoken" value={{systemconfig_obj.sys_privatetoken}}>  
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="sys_version" class="col-md-3 control-label">系统版本：</label>
+                <div class="col-md-9">
+                <input type="text" class="form-control" id="sys_version"  name="sys_version" value={{systemconfig_obj.sys_version}}>  
+                </div>
+              </div>
+                <div class="form-group">
+                <label for="sys_lable" class="col-md-3 control-label">系统标签：</label>
+                <div class="col-md-9">
+                <input type="text" class="form-control" id="sys_lable" name="sys_lable" value={{systemconfig_obj.sys_lable}}>  
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="sys_description" class="col-md-3 control-label">系统描述：</label>
+                <div class="col-md-9">
+                <textarea class="form-control" rows="3" id="sys_description" name="sys_description">{{systemconfig_obj.sys_description}}</textarea>  
+                </div>
+              </div>
+              <div class="form-group">
+              <label for="sys_type" class="col-md-3 control-label">系统类型：</label>
+                <div class="col-md-9">
+               <select class="form-control" name='sys_type' >
+                    <option value='git'>Git 源码管理系统</option>
+                     <option value='svn'>SVN 源码管理系统</option>
+                     <option value='jenkins'>Jenkins 构建服务</option>
+                     <option value='nexus'>Nexus 依赖管理系统</option>
+                     <option value='others'>其他项目管理系统</option>
+                </select>
+              </div>
+            </div>
+          
+            <div class="col-md-9 col-md-offset-3">
+              <button type="submit" class="btn btn-primary pull-right btn-block">提交</button>
+           </div>
+
+          </form>
+        </div>
+    </div> 
+    
+{% endblock main_content %}
