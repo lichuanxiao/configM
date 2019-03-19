@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from login.views import index,login,logout,adduser,user,deleteuser,edituser,searchuser
+import repoM
+import projectM
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^index/',index),
@@ -27,4 +29,6 @@ urlpatterns = [
     url(r'^deleteuser/([0-9]+)/$',deleteuser,name='deleteuser'),
     url(r'^searchuser/',searchuser,name='searchuser'),
     url(r'^captcha',include('captcha.urls')),
+    url(r'^repoM/',include('repoM.urls')),
+    url(r'^projectM/',include('projectM.urls')),
 ]

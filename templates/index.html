@@ -5,27 +5,8 @@
 {% block css %}
 <link href="{% static 'css/login.css' %}" rel="stylesheet"/>
 {% endblock css %}
-{% block sidebar %}
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="/index/">首页 <span class="sr-only">(current)</span></a></li>
-            <li><a href="/repo/">仓库管理</a></li>
-            <li><a href="/daily_submit/">每日提交</a></li>
-            <li><a href="/code_statistics/">代码统计</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="/projects/">项目管理</a></li>
-            <li><a href="/hosts/">服务器管理</a></li>
-            <li><a href="/release/">发布管理</a></li>
-            <li><a href="/auto_build/">自动构建</a></li>
-
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="/user/">用户管理</a></li>
-            <li><a href="/env/">环境管理</a></li>
-            <li><a href="/sys_config/">系统配置</a></li>
-          </ul>
-{% endblock sidebar %}
 {% block page-header %}用户清单{% endblock %}
+{% block index_active %}active{% endblock %}
 {% block main_content %}
     <table class="table">
     <thead>

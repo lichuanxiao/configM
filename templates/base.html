@@ -53,7 +53,26 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          {% block sidebar %}{% endblock %}
+          {% block sidebar %}
+          <ul class="nav nav-sidebar">
+            <li class="{% block index_active %}{% endblock %}"><a href="/index/">首页 </a></li>
+            <li class="{% block repo_active %}{% endblock %}"><a href="/repo/">仓库管理</a></li>
+            <li class="{% block daily_submit_active %}{% endblock %}"><a href="/daily_submit/">每日提交</a></li>
+            <li class="{% block code_statistics_active %}{% endblock %}"><a href="/code_statistics/">代码统计</a></li>
+          </ul> 
+          <ul class="nav nav-sidebar">
+            <li class="{% block projects_active %}{% endblock %}"><a href="/projects/">项目管理</a></li>
+            <li class="{% block hosts_active %}{% endblock %}"><a href="/hosts/">服务器管理</a></li>
+            <li class="{% block release_active %}{% endblock %}"><a href="/release/">发布管理</a></li>
+            <li class="{% block auto_build_active %}{% endblock %}"><a href="/auto_build/">自动构建</a></li>
+
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li class="{% block user_active %}{% endblock %}"><a href="/user/">用户管理</a></li>
+            <li class="{% block env_active %}{% endblock %}"><a href="/env/">环境管理</a></li>
+            <li class="{% block systemconfig_active %}{% endblock %}"><a href="/repoM/systemconfig/">系统配置</a></li>
+          </ul>
+{% endblock sidebar %}
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">{% block page-header %}Dashboard{% endblock %}</h1>
