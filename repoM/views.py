@@ -1,8 +1,24 @@
 from django.shortcuts import render,redirect,HttpResponse
 from .models import SystemConfig
 from copy import deepcopy
+from .gitlab import Gitlab
 
 # Create your views here.
+def repo(request):
+    return render(request,'repo/repo.html',locals())
+
+def addrepo(request):
+    return HttpResponse("敬请期待")
+
+
+def importrepo(request):
+    sys_list = SystemConfig.objects.filter(sys_type='git')
+    if request.method == 'POST':
+        message="仓库导入只支持 GitLab 仓库"
+        sys_id = request.POST['sys_choice']
+        
+        print(sys_id)
+    return render(request,'repo/importrepo.html',locals())
 
 def systemconfig(request):
     systemconfig_obj = SystemConfig.objects.all()

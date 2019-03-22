@@ -1,0 +1,78 @@
+{% extends 'base-nav.html' %}
+{% load staticfiles %}
+{% block title %}configM 导入仓库
+{% endblock title %}
+{% block css %}
+<link href="{% static 'css/importrepo.css' %}" rel="stylesheet"/>
+{% endblock css %}
+{% block main_content %}
+     <!-- Jumbotron -->
+       <div class="jumbotron">
+            <h1>导入仓库</h1>
+            <p class="lead">仓库导入目前只支持 GitLab 管理的仓库导入！其他仓库请手动添加。 </p>
+            <div class="add-container-top">
+          <div class="container">
+         <div class="row">
+        <form class='form-horizontal' action="/repoM/importrepo/" method="post">
+
+              {% if message %}
+                  <div class="alert alert-warning">{{ message }}</div>
+              {% endif %}
+
+              {% csrf_token %}
+
+              <div class="form-group">
+              <label for="sys_choice" class="col-md-2 col-md-offset-2  clear-padding-top"><p>系统选择:</p></label>
+                <div class="col-md-5">
+                <select class="form-control" name='sys_choice' >
+                {% if sys_list %}
+                {% for sys in sys_list %}
+                <option value="{{sys.id}}">{{sys.sys_name}}:{{sys.sys_url}}</option>
+                {% endfor %}
+                {% else %}
+                <option value='none'>--请先添加类型为 Git 管理的系统配置--</option>
+                {% endif %}
+                </select>
+              </div>
+            </div>
+          <div class="col-md-2 col-md-offset-5">
+              <button type="submit" class="btn btn-success pull-right btn-block">导入</button>
+           </div>
+
+         </form>
+        </div>  
+         </div>         
+        </div>
+      </div>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    
+{% endblock main_content %}
+
+
+
+
+            
+         <div class="container">
+         <div class="row">
+         <form class='form-horizontal' action="/repoM/addsystemconfig/" method="post">
+
+              {% if message %}
+                  <div class="alert alert-warning">{{ message }}</div>
+              {% endif %}
+
+              {% csrf_token %}
+                <div class="form-group">
+            <div class="form-group">
+              <label for="sys_type" class="col-md-2 control-label"><p class="lead">系统类型：<p></label>
+                <div class="col-md-5">
+               <select class="form-control" name='sys_type' >
+                    <option value='git'>Git 源码管理系统</option>
+                     <option value='svn'>SVN 源码管理系统</option>
+                     <option value='jenkins'>Jenkins 构建服务</option>
+                     <option value='nexus'>Nexus 依赖管理系统</option>
+                     <option value='others'>其他项目管理系统</option>
+                </select>
+              </div>
+            </div>  
+         </div>
