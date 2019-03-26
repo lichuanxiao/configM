@@ -20,5 +20,5 @@ class Gitlab():
                 break
             for k in range(len(project_list_json)):
                 single_project_info = project_list_json[k]
-                single_project_dic = {"id":single_project_info["id"],"name":single_project_info["name"],"namespace":single_project_info["namespace"]["name"],"description":single_project_info["description"], "http_url_to_repo":single_project_info["http_url_to_repo"]}
+                single_project_dic = {"repo_id":single_project_info["id"],"repo_name":single_project_info["name"],"repo_group":single_project_info["namespace"]["name"],"repo_description":single_project_info["description"], "repo_url":single_project_info["http_url_to_repo"]}
                 self.projects.append(single_project_dic)

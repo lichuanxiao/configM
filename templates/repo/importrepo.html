@@ -27,7 +27,7 @@
                 <select class="form-control" name='sys_choice' >
                 {% if sys_list %}
                 {% for sys in sys_list %}
-                <option value="{{sys.id}}">{{sys.sys_name}}:{{sys.sys_url}}</option>
+                <option value="{{sys.id}}">{{sys.sys_name}}:{{sys.sys_url}}:{{sys.id}}</option>
                 {% endfor %}
                 {% else %}
                 <option value='none'>--请先添加类型为 Git 管理的系统配置--</option>

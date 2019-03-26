@@ -45,12 +45,15 @@ class CodeRepo(models.Model):
     repo_name = models.CharField(max_length=128)
     repo_group = models.CharField(max_length=123)
     repo_url = models.URLField()
-    rpeo_description = models.TextField()
+    repo_description = models.TextField()
+    repo_system = models.IntegerField()
+    repo_id = models.IntegerField()
 
     def __str__(self):
-        return self.repo_name
+        return self.repo_name    
     
     class Meta:
         ordering = ['-repo_group']
+        
 
 
