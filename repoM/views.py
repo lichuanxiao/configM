@@ -5,10 +5,36 @@ from .gitlab import Gitlab
 
 # Create your views here.
 def repo(request):
+    code_repo_obj = CodeRepo.objects.all()
     return render(request,'repo/repo.html',locals())
 
 def addrepo(request):
-    return HttpResponse("敬请期待")
+    #获取已配置类型为 git 的列表
+    sys_list = SystemConfig.objects.filter(sys_type='git')
+    if request.method == 'POST':
+        add_description = request.POST['repo_description']
+        add_name = request.POST['repo_name']
+        add_group = request.POST['repo_group']
+        add_system = request.POST['repo_system']
+        if CodeRepo.objects.filter(repo_system=add_system).filter(repo_name=add_name).filter(repo_group=add_group):
+            message = "当前系统已存在你想要创建的 repo"
+        else:
+            try:
+                sys_obj = SystemConfig.objects.get(id=add_system)
+                gitlab_obj = Gitlab(sys_obj.sys_api_url,sys_obj.sys_privatetoken)
+                print(sys_obj,add_system,gitlab_obj)
+                _rel = gitlab_obj.create_project(add_name,add_group,add_description)
+                print(_rel)
+                if _rel[0]:
+                    print(add_name,add_group,add_description,add_system,_rel[2],_rel[3])
+                    CodeRepo.objects.create(repo_name=add_name,repo_group=add_group,repo_description=add_description,repo_system=add_system,repo_id=_rel[2],repo_url=_rel[3])
+                    return redirect('/repoM/repo')
+                else:
+                    print(add_name,add_group)
+                    message = _rel[1]
+            except:
+                message = "找不到所选的系统 Id"
+    return render(request,'repo/addrepo.html',locals())
 
 
 def importrepo(request):
@@ -20,7 +46,7 @@ def importrepo(request):
         try:
             sys_obj = SystemConfig.objects.get(id=sys_id)
             print("test")
-            repo_list = Gitlab(sys_obj.sys_api_url,sys_obj.sys_privatetoken).projects
+            repo_list = Gitlab(sys_obj.sys_api_url,sys_obj.sys_privatetoken).project_list().projects
             print("test2")
             print(repo_list)
             repo_id_list = [repo_id['repo_id'] for repo_id in CodeRepo.objects.filter(repo_system=sys_id).values('repo_id')] 
