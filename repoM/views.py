@@ -36,6 +36,10 @@ def addrepo(request):
                 message = "找不到所选的系统 Id"
     return render(request,'repo/addrepo.html',locals())
 
+def searchrepo(request):
+    if request.method == 'POST':
+        code_repo_obj = CodeRepo.objects.filter(repo_name__contains=request.POST["repo_search_filter"])
+    return render(request,'repo/repo.html',locals())
 
 def importrepo(request):
     sys_list = SystemConfig.objects.filter(sys_type='git')
