@@ -110,3 +110,4 @@ def addsystemconfig(request):
             SystemConfig.objects.create(**sys_info)
             return redirect('/repoM/systemconfig/')
     return render(request,'addsystemconfig.html',locals())
+

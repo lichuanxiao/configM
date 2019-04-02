@@ -6,7 +6,7 @@
 
 ## repo 管理
 
-- [ ] 1. 导入 repo、新建 repo 、展示 repo、搜索 repo、筛选
+- [*] 1. 导入 repo、新建 repo 、展示 repo、搜索 repo、筛选
 
 - [ ] 2. repo 默认分支、保护分支设置，分支删除，分支创建，合并分支
 

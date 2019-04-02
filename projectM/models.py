@@ -5,12 +5,14 @@ from login.models import User
 # Create your models here.
 class ProjectList(models.Model):
     pro_type = (
-        ('Internal','内部项目'),
+        ('standard','内部-标准项目'),
+        ('Non-standard','内部-非标项目'),
         ('Outgoing','外部项目'),
     )
     project_name = models.CharField(max_length=128,unique=True)
     project_type = models.CharField(max_length=20,choices=pro_type,default='Internal')
     description = models.TextField()
+    project_key = models.CharField(max_length=20,unique=True)
     code_repo = models.ManyToManyField(CodeRepo, through='ProjectRepo')
     c_time = models.DateField(auto_now_add=True)
 

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}configM 项目管理
+{% endblock title %}
+{% block css %}
+<link href="{% static 'css/repo.css' %}" rel="stylesheet"/>
+{% endblock css %}
+{% block page-header %}项目管理{% endblock %}
+{% block projects_active %}active{% endblock %}
+{% block main_content %}
+<div class="container">
+
+<div class="row">
+     <form class="from"  action="/projectM/searchproject/" method="post" >
+     <div class="button-margin">
+        <a class="btn btn-primary btn-block " href="/projectM/addproject/" role="button">
+        <span class="glyphicon glyphicon-cog " aria-hidden="true">
+        </span>&nbsp;&nbsp;添加项目</a>
+         </div>
+        <div class="form-group col-md-3 col-md-offset-5">
+          <input type="text" class="form-control" name="project_search_filter" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-primary">查询</button>
+    </form>     
+    
+</div>
+</div>
+
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading">项目列表</div>
+
+  <!-- Table -->
+    <table class="table">
+    <thead>
+        <tr>
+            <th>项目名称</th>
+            <th>项目描述</th>
+            <th>项目类型</th>
+            <th>项目键值</th>
+            <th>创建时间</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    {% if projects %}
+    <tbody>
+        {% for  project in  projects %}    
+        <tr>
+            <td>{{project.project_name}}</td>
+            <td>{{project.description}}</td>
+            <td>{{project.get_project_type_display}}</td>
+            <td><a href="{{project.project_key}}">{{project.project_key}}</a></td>
+            <td>{{project.c_time}}</td>
+               <td>
+                <a href="#" class="btn btn-primary" role="button"><span class="glyphicon  glyphicon-pencil" aria-hidden="true"></span>&nbsp;编辑</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+        {% else %}
+        <tbody>
+        </tbody>
+        <h2>没有数据</h2>
+        {% endif %}
+    </table>
+</div>
+
+{% endblock %}

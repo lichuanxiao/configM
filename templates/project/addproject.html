@@ -1,0 +1,53 @@
+{% extends '../base-edit.html' %}
+{% load staticfiles %}
+{% block title %}添加 project
+{% endblock title %}
+{% block css %}
+{% endblock css %}
+{% block page-header %}添加 project{% endblock %}
+{% block main_content %}
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+          <form class='form-horizontal' action="/projectM/addproject" method="post">
+
+              {% if message %}
+                  <div class="alert alert-warning">{{ message }}</div>
+              {% endif %}
+              {% csrf_token %}
+                <div class="form-group">
+                <label for="project_name" class="col-md-3 control-label">项目名称：</label>
+                <div class="col-md-9">
+                <input type="text" class="form-control" id="project_name" name="project_name">      
+                </div>
+                </div>
+                <div class="form-group">
+                <label for="project_key" class="col-md-3 control-label">项目键值：</label>
+                <div class="col-md-9">
+                <input type="text" class="form-control" id="project_key" name="project_key" placeholder="所有字母将会转换为大写"  >      
+                </div>
+                </div>
+              <div class="form-group">
+                <label for="project_description" class="col-md-3 control-label">项目描述：</label>
+                <div class="col-md-9">
+                <textarea class="form-control" rows="3" id="project_description" name="project_description"></textarea>  
+                </div>
+              </div>
+          <div class="form-group">
+              <label for="project_type" class="col-md-3 control-label"><p>项目类型:</p></label>
+                <div class="col-md-9">
+                <select class="form-control" name='project_type' >
+                <option value='standard'>内部-标准项目</option>
+                <option value='Non-standard'>内部-非标项目</option>
+                <option value='Outgoing'>外部项目</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-9 col-md-offset-3">
+              <button type="submit" class="btn btn-primary pull-right btn-block">提交</button>
+           </div>
+
+          </form>
+        </div>
+    </div> 
+    
+{% endblock main_content %}
